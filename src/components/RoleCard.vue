@@ -6,8 +6,10 @@
       <p class="uk-text-small">
         {{ user.description }}
       </p>
-      <div>
-        images
+      <div >
+        <span v-for="person in user.users">
+          <UsersImage :person="person"/>
+        </span>
       </div>
     </div>
     <div>
@@ -32,8 +34,10 @@
 </template>
 
 <script>
+import UsersImage from "./UsersImage";
 export default {
   name: "RoleCard",
+  components: {UsersImage},
   props: {
     user:{
       required: true,
