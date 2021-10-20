@@ -5,11 +5,17 @@
       <div class="uk-text-right" v-if="!user.active">
         <span class="uk-badge " style="background-color: red">Inactive</span>
       </div>
-      <h4>{{ user.name}}</h4>
-      <p class="userRole">{{ user.type }}</p>
-      <p class="uk-text-small">
-        {{ user.description }}
-      </p>
+      <div class="uk-text-right" v-else>
+        <br>
+      </div>
+
+      <div>
+        <h4>{{ user.name}}</h4>
+        <p class="userRole">{{ user.type }}</p>
+        <p class="uk-text-small">
+          {{ user.description }}
+        </p>
+      </div>
       <div >
         <span v-for="person in user.users">
           <UsersImage :person="person"/>
