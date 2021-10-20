@@ -1,8 +1,12 @@
 <template>
   <div class="roleCardContainer">
+
     <div class="roleSemiContainer">
+      <div class="uk-text-right" v-if="!user.active">
+        <span class="uk-badge " style="background-color: red">Inactive</span>
+      </div>
       <h4>{{ user.name}}</h4>
-      <p>{{ user.type }}</p>
+      <p class="userRole">{{ user.type }}</p>
       <p class="uk-text-small">
         {{ user.description }}
       </p>
@@ -15,8 +19,8 @@
     <div>
       <div class="roleActionContainer">
         <div class="" uk-grid>
-          <div class="uk-width-1-2 ">
-            <p>Date Created: 11/01/2019</p>
+          <div class="uk-width-1-2">
+            <p class="dateCreated">Date Created: <span>{{ user.created_on | moment("calendar") }} </span></p>
           </div>
           <div class="uk-width-1-2@s">
             <div>
@@ -59,5 +63,13 @@ export default {
   .roleActionContainer{
     background-color: rgba(153, 153, 153, 0.3);
     padding: 10px;
+  }
+  .userRole{
+    margin-top: -20px;
+    font-size:  14px;
+    text-transform: capitalize;
+  }
+  .dateCreated{
+    font-size: small;
   }
 </style>

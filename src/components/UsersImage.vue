@@ -17,12 +17,7 @@ export default {
 </script>
 
 <style scoped>
-  .imgContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    justify-items: flex-start;
-  }
+
   .imgStyle{
     height: 30px;
     width: 30px;
