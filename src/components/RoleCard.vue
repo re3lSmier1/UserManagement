@@ -20,14 +20,15 @@
       <div class="roleActionContainer">
         <div class="" uk-grid>
           <div class="uk-width-1-2">
-            <p class="dateCreated">Date Created: <span>{{ user.created_on | moment("calendar") }} </span></p>
+            <p class="dateCreated" v-if="!user.editable">Last update: <span>{{ user.modified_on | moment("calendar") }} </span></p>
+            <p class="dateCreated" v-if="user.editable">Date Created: <span>{{ user.created_on | moment("calendar") }} </span></p>
           </div>
           <div class="uk-width-1-2@s">
-            <div>
-              <a href="#" class="uk-button uk-button-link uk-margin-small-right">Edit</a>
-              <a href="#" class="uk-button uk-button-link">Delete</a>
+            <div class="uk-align-right" v-if="user.editable">
+              <a href="#" class="uk-button uk-button-link uk-margin-small-right uk-text-bold">Edit</a>
+              <a href="#" class="uk-button uk-button-link uk-text-danger uk-text-bold">Delete</a>
             </div>
-            <div class="uk-align-right">
+            <div class="uk-align-right" v-if="!user.editable">
               <span uk-icon="lock" style="padding-right: 15px"></span>
             </div>
           </div>
