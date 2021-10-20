@@ -11,7 +11,7 @@
         <SelectFilter/>
         <div class="newRoleContainer">
           <br>
-          <button class="uk-button uk-button-primary">Create New Role</button>
+          <router-link to="/create" class="uk-button uk-button-primary">Create New Role</router-link>
         </div>
 
       </div>

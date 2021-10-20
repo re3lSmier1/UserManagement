@@ -36,7 +36,9 @@ export default new Vuex.Store({
     UpdateSearchKey(state, payload){
       state.searchKey = payload
     },
-
+    AddNewRole(state, payload){
+        state.roles.push(payload)
+    }
   },
   actions: {
     setCurrentRole({ state, commit}, payload) {
@@ -45,7 +47,11 @@ export default new Vuex.Store({
     setSearchKey({commit}, payload){
       console.log(payload)
       commit('UpdateSearchKey', payload)
+    },
+    AddNewRole({state, commit}, payload){
+      commit('AddNewRole', payload)
     }
+
   },
   modules: {
   }
