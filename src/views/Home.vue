@@ -31,8 +31,8 @@
       </div>
       <br><br>
       <div class="uk-child-width-1-3@m" uk-grid>
-        <div>
-          <RoleCard />
+        <div v-for="item in getUserRoles">
+          <RoleCard :user="item"/>
         </div>
       </div>
     </div>
@@ -47,7 +47,15 @@ export default {
   name: 'Home',
   components: {
     RoleCard
-
+  },
+  computed: {
+    getUserRoles: function (){
+      console.log(this.$store.state.roles)
+      return this.$store.state.roles
+    }
+  },
+  mounted() {
+    this.getUserRoles
   }
 }
 </script>

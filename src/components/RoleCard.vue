@@ -1,10 +1,10 @@
 <template>
   <div class="roleCardContainer">
     <div class="roleSemiContainer">
-      <h4>Title</h4>
-      <p>Administrator Role</p>
+      <h4>{{ user.name}}</h4>
+      <p>{{ user.type }}</p>
       <p class="uk-text-small">
-        Description
+        {{ user.description }}
       </p>
       <div>
         images
@@ -33,7 +33,13 @@
 
 <script>
 export default {
-  name: "RoleCard"
+  name: "RoleCard",
+  props: {
+    user:{
+      required: true,
+      type: Object
+    }
+  }
 }
 </script>
 
