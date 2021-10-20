@@ -31,7 +31,7 @@
           </div>
           <div class="uk-width-1-2@s">
             <div class="uk-align-right" v-if="user.editable">
-              <a href="#" class="uk-button uk-button-link uk-margin-small-right uk-text-bold">Edit</a>
+              <a href="#" class="uk-button uk-button-link uk-margin-small-right uk-text-bold" @click="edit(user.id)">Edit</a>
               <a href="#" class="uk-button uk-button-link uk-text-danger uk-text-bold">Delete</a>
             </div>
             <div class="uk-align-right" v-if="!user.editable">
@@ -53,6 +53,11 @@ export default {
     user:{
       required: true,
       type: Object
+    }
+  },
+  methods:{
+    edit: function (id){
+      this.$router.push({ path: '/edit', query: { id }})
     }
   }
 }

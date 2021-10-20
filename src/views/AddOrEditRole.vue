@@ -41,11 +41,13 @@
             </div>
 
             <div class="uk-margin">
-              <button class="uk-button uk-button-secondary uk-align-right" style="background-color: #004e9c;">Send</button>
+              <button class="uk-button uk-button-secondary uk-align-right" style="background-color: #004e9c;" v-if="this.$route.query.id">Edit</button>
+              <button class="uk-button uk-button-secondary uk-align-right" v-else style="background-color: #004e9c;">Create</button>
             </div>
           </fieldset>
         </form>
       </div>
+
 
     </div>
   </div>
@@ -61,29 +63,63 @@ export default {
       roleType: '',
       roleDescription: '',
       isEditable: false,
-      isActive: false
+      isActive: false,
+    }
+  },
+  computed:{
+    getCurrentRole: function (){
+
+     // console.log(this.$store.getters.findUser(this.$store.state.selectedRole)[0])
+
+      return this.$store.getters.findUser(this.$store.state.selectedRole)[0]
     }
   },
   methods: {
     validateForm(scope) {
       this.$validator.validateAll(scope).then((result) => {
         if (result) {
-          this.$store.dispatch('AddNewRole',{
-            name: this.roleName,
-            type: this.roleType,
-            description: this.roleDescription,
-            editable: this.isEditable,
-            active: this.isActive,
-            created_on: Date.now(),
-            modified_on: Date.now(),
-          })
-          UIkit.notification('New Role created');
-          this.$router.push('/')
-          /*alert('Form Submitted!');*/
+          if (this.$route.path === '/edit' && this.$route.query.id){
+            alert("edit")
+            this.$store.dispatch('EditRole',{
+              name: this.roleName,
+              type: this.roleType,
+              description: this.roleDescription,
+              editable: this.isEditable,
+              active: this.isActive,
+              created_on: Date.now(),
+              modified_on: Date.now(),
+              id: this.$route.query.id
+            })
+          }else{
+            this.$store.dispatch('AddNewRole',{
+              name: this.roleName,
+              type: this.roleType,
+              description: this.roleDescription,
+              editable: this.isEditable,
+              active: this.isActive,
+              created_on: Date.now(),
+              modified_on: Date.now(),
+            })
+            UIkit.notification('New Role created');
+            this.$router.push('/')
+          }
 
         }
       });
     }
+  },
+  mounted() {
+    console.log(this.$route.path)
+    if(this.$route.query.id){
+      this.$store.dispatch('SetSelectedRole', this.$route.query.id)
+    }
+    //console.log(this.$route.query.id)
+    /*if(this.$route.query.id){
+      console.log(this.$route.query.id)
+      const data = this.$store.getters.findUser(this.$route.query.id)
+      console.log(data)
+      this.name = data.name
+    }*/
   }
 }
 </script>

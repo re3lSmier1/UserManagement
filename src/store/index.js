@@ -10,6 +10,7 @@ export default new Vuex.Store({
     filterOptions: [ 'Active', 'InActive', 'Active and Inactive'],
     currentRole: 'Active and Inactive',
     searchKey: '',
+    selectedRole: '',
   },
   getters: {
     filterByRoles: state => () =>{
@@ -27,6 +28,11 @@ export default new Vuex.Store({
             return role.name.match(state.searchKey)
           })
       }
+    },
+    findUser: state => (selectedRole) =>{
+      return state.roles.filter(function (role) {
+        return role.id === parseInt(selectedRole)
+      })
     }
   },
   mutations: {
@@ -38,7 +44,17 @@ export default new Vuex.Store({
     },
     AddNewRole(state, payload){
         state.roles.push(payload)
-    }
+    },
+    EditRole(state, payload){
+        //state.roles.push(payload)
+    },
+
+    SetSelectedRole(state, payload){
+      console.log('s')
+      state.selectedRole = payload
+
+    },
+
   },
   actions: {
     setCurrentRole({ state, commit}, payload) {
@@ -50,7 +66,14 @@ export default new Vuex.Store({
     },
     AddNewRole({state, commit}, payload){
       commit('AddNewRole', payload)
-    }
+    },
+    EditRole({state, commit}, payload){
+      commit('EditRole', payload)
+    },
+    SetSelectedRole({state, commit}, payload){
+      commit('SetSelectedRole', payload)
+    },
+
 
   },
   modules: {

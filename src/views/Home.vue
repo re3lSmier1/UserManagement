@@ -46,7 +46,7 @@ export default {
 
   computed: {
     getUserRoles: function (){
-      console.log(this.$store.getters.filterByRoles(this.$store.state.currentRole))
+      //console.log(this.$store.getters.filterByRoles(this.$store.state.currentRole))
       return this.$store.getters.filterByRoles(this.$store.state.currentRole)
 
     },
