@@ -16,13 +16,7 @@
             </div>
           </div>
         </div>
-        <div>
-          <label for="roleStatus" class="uk-text-small">Role Status</label>
-          <select class="uk-select">
-            <option>Option 01</option>
-            <option>Option 02</option>
-          </select>
-        </div>
+        <SelectFilter/>
         <div class="newRoleContainer">
           <br>
           <button class="uk-button uk-button-primary">Create New Role</button>
@@ -32,7 +26,7 @@
       <br><br>
       <div class="uk-child-width-1-3@m" uk-grid>
         <div v-for="item in getUserRoles">
-          <RoleCard :user="item"/>
+          <RoleCard  :user="item"/>
         </div>
       </div>
     </div>
@@ -43,19 +37,31 @@
 
 
 import RoleCard from "../components/RoleCard";
+import SelectFilter from "../components/SelectFilter";
 export default {
   name: 'Home',
-  components: {
-    RoleCard
-  },
-  computed: {
-    getUserRoles: function (){
-      console.log(this.$store.state.roles)
-      return this.$store.state.roles
+  data() {
+    return {
+      role: "InActive"
     }
   },
+  components: {
+    SelectFilter,
+    RoleCard
+  },
+
+  computed: {
+    getUserRoles: function (){
+      return this.$store.getters.filterByRoles(this.$store.state.currentRole)
+
+    },
+    getOptions: function (){
+      return this.$store.state.filterOptions
+    }
+  },
+
   mounted() {
-    this.getUserRoles
+
   }
 }
 </script>
