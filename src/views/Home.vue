@@ -6,15 +6,7 @@
       <div class="uk-child-width-1-3@m" uk-grid>
         <div>
          <br>
-          <div uk-grid>
-            <div class="uk-width-4-5@s">
-
-              <input class="uk-input" type="text" placeholder="Search">
-            </div>
-            <div class="uk-width-1-5@s">
-              <a href="" uk-icon="icon: search"></a>
-            </div>
-          </div>
+          <SearchText/>
         </div>
         <SelectFilter/>
         <div class="newRoleContainer">
@@ -38,20 +30,23 @@
 
 import RoleCard from "../components/RoleCard";
 import SelectFilter from "../components/SelectFilter";
+import SearchText from "../components/SearchText";
 export default {
   name: 'Home',
   data() {
     return {
-      role: "InActive"
+      search: ""
     }
   },
   components: {
+    SearchText,
     SelectFilter,
     RoleCard
   },
 
   computed: {
     getUserRoles: function (){
+      console.log(this.$store.getters.filterByRoles(this.$store.state.currentRole))
       return this.$store.getters.filterByRoles(this.$store.state.currentRole)
 
     },

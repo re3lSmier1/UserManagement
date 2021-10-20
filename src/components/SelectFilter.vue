@@ -23,8 +23,6 @@ export default {
   },
   methods: {
     onChange(event) {
-      //console.log(event.target.value)
-      this.$store.getters.filterByRoles(event.target.value)
       this.$store.dispatch('setCurrentRole', this.role)
     }
   }
